@@ -5,3 +5,5 @@ files/src/App.vue
 files/src/views/Home.vue
 files/src/views/About.vue
 files/src/components/HelloWorld.vue
+files/src/models/User.ts
+files/src/api/index.ts
