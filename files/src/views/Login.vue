@@ -8,7 +8,6 @@
           type="email"
           class="form-control"
           id="email"
-          placeholder="name@example.com"
         />
         <span>{{ emailError }}</span>
       </div>
