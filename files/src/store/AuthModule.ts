@@ -36,10 +36,11 @@ export default {
     }
   },
   actions: {
-    init: function(context: Context) {
+    init: async function(context: Context) {
       const jwt = localStorage.getItem('jwt')
       if (jwt) {
         context.commit('setJwt', jwt);
+        await context.dispatch('profile');
       }
     },
     login: async function (context: Context, data: AuthenticationData): Promise<LoginResponse> {
