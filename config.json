@@ -1,0 +1,6 @@
+{
+  "extension": "ts"
+  "componentExtension": "vue",
+  "routerFileName": "index.ts",
+  "routerFolder": "router"
+}
