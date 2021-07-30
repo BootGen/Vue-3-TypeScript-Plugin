@@ -1,5 +1,5 @@
 <template>
-  <div class="card" style="width: 18rem;">
+  <div class="card">
     <div class="row">
       <div class="col-md-6">
         <button type="button" class="btn btn-default btn-sm"  @click="$emit('edit')">

@@ -3,7 +3,7 @@
     <div class="row">
       <div
         class="col-md-2"
-        v-for="item in store.state.{{ camel_case class.name.plural }}"
+        v-for="item in store.state.{{ camel_case class.name.plural }}.{{ camel_case class.name.plural }}"
         :key="item.id"
       >
         <{{ camel_case class.name }}-edit :{{ camel_case class.name }}="item" @close="finishEditing()" v-if="edited{{ class.name }}Id === item.id"></{{ camel_case class.name }}-edit>
