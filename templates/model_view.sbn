@@ -15,7 +15,7 @@
     <ul class="list-group list-group-flush">
     {{~ for property in class.common_properties ~}}
       <li class="list-group-item">
-      {{ camel_case property.name }}:
+      {{ property.name }}:
       {{~ if (get_type property) == "Date" ~}}
       {{'{{'}} $filters.dateFormat({{ camel_case class.name }}.{{ camel_case property.name }}) {{'}}'}}
       {{~ else ~}}

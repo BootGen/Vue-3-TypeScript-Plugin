@@ -16,7 +16,7 @@
     {{~ for property in class.common_properties ~}}
     {{~ if !property.is_parent_reference && property.name != "Id" && property.name != "Created" && property.name != "Updated" ~}}
       <li class="list-group-item">
-        name:
+        {{ property.name }}:
         <input
           v-model="edited{{ class.name }}.{{camel_case property.name}}"
           {{~ if (get_type property) == "Date" ~}}
