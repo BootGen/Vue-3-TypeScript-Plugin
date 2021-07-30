@@ -15,7 +15,7 @@
     <ul class="list-group list-group-flush">
 
     {{~ for property in class.common_properties ~}}
-    {{~ if !property.is_parent_reference && (camel_case property.name) != "id" ~}}
+    {{~ if !property.is_parent_reference && property.name != "Id" && property.name != "Created" && property.name != "Updated" ~}}
       <li class="list-group-item">
         name:
         <input

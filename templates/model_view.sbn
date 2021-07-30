@@ -17,7 +17,7 @@
       <li class="list-group-item">
       {{ camel_case property.name }}:
       {{~ if (get_type property) == "Date" ~}}
-      {{'{{'}} {{ camel_case class.name }}.{{ camel_case property.name }} | dateFormat {{'}}'}}
+      {{'{{'}} $filters.dateFormat({{ camel_case class.name }}.{{ camel_case property.name }}) {{'}}'}}
       {{~ else ~}}
       {{'{{'}} {{ camel_case class.name }}.{{ camel_case property.name }} {{'}}'}}
       {{~ end ~}}
