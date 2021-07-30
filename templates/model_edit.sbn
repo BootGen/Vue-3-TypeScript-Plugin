@@ -13,22 +13,19 @@
       </div>
     </div>
     <ul class="list-group list-group-flush">
-    {{func html_type
-      if $0 == "Date"
-        ret "datetime-local"
-      else if $0 == "number"
-        ret "number"
-      else
-        ret "text"
-      end
-    end}}
     {{~ for property in class.common_properties ~}}
     {{~ if !property.is_parent_reference && property.name != "Id" && property.name != "Created" && property.name != "Updated" ~}}
       <li class="list-group-item">
         name:
         <input
           v-model="edited{{ class.name }}.{{camel_case property.name}}"
-          type={{ html_type (get_type property) }}
+          {{~ if (get_type property) == "Date" ~}}
+          type="datetime-local"
+          {{~ else if (get_type property) == "number" ~}}
+          type="number"
+          {{~ else ~}}
+          type="text"
+          {{~ end ~}}
           class="form-control"
           id="{{camel_case property.name}}"
         />
