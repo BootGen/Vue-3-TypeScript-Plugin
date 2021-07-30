@@ -49,10 +49,6 @@ const api = {
     const response = await axios.post('registration/register', data);
     return response.data;
   },
-  activate: async function (activationToken: string): Promise<boolean> {
-    const response = await axios.post(`registration/activate?activationToken=${activationToken}`);
-    return response.data;
-  },
   profile: async function (jwt: string): Promise<User> {
     const response = await axios.get('profile', config(jwt));
     return response.data;
