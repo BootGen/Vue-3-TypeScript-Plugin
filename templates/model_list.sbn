@@ -3,7 +3,7 @@
     <div class="row">
       <div
         class="col-md-2"
-        v-for="item in store.state.{{ camel_case class.name.plural }}.items"
+        v-for="item in store.state.{{ camel_case class.name.plural }}"
         :key="item.id"
       >
         <{{ camel_case class.name }}-edit :{{ camel_case class.name }}="item" @close="finishEditing()" v-if="edited{{ class.name }}Id === item.id"></{{ camel_case class.name }}-edit>
@@ -25,7 +25,7 @@ export default defineComponent({
   components: { {{ class.name }}View, {{ class.name }}Edit },
   setup: function () {
     const store = useStore<State>();
-    store.dispatch('{{ camel_case class.name.plural }}/get{{ class.name.plural }}');
+    store.dispatch('get{{ class.name.plural }}');
     const edited{{ class.name }}Id = ref(-1)
     return { store, edited{{ class.name }}Id }
   },
