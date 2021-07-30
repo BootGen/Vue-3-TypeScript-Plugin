@@ -1,1 +1,1 @@
-# Vue TypeScript static files for BootGen
+# Vue 3 TypeScript Plugin for BootGen
