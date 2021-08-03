@@ -2,12 +2,12 @@
   <div class="container-fluid">
     <form>
       <div class="mb-3">
-        <label for="password" class="form-label">Old Password</label>
+        <label for="oldPassword" class="form-label">Old Password</label>
         <input
           v-model="oldPassword"
           type="password"
           class="form-control"
-          id="password"
+          id="oldPassword"
         />
         <span>{{ oldPasswordError }}</span>
       </div>
