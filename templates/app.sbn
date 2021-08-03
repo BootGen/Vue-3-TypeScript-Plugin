@@ -5,6 +5,7 @@
     {{~ for class in classes ~}}
     | <router-link to="/{{ camel_case class.name.plural }}">{{ class.name.plural }}</router-link>
     {{~ end ~}}
+    | <router-link to="/logout">Logut</router-link>
   </div>
   <div id="nav"  v-else>
     <router-link to="/">Login</router-link> |

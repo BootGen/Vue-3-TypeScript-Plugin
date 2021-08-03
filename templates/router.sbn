@@ -32,6 +32,19 @@ const routes: Array<RouteRecordRaw> = [
     component: Login
   },
   {
+    path: '/logout',
+    name: 'Logout',
+    beforeEnter: (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+      if (store.state.auth.user) {
+        store.commit('logout');
+        next();
+      } else {
+        next('/');
+      }
+    },
+    component: Logout
+  },
+  {
     path: '/sign-up',
     name: 'Sign Up',
     beforeEnter: loggedOutGuard,

@@ -33,6 +33,10 @@ export default {
     },
     setUser: function(state: AuthState, user: User) {
       state.user = user
+    },
+    logout: function(state: AuthState) {
+      state.user = null;
+      localStorage.removeItem('jwt');
     }
   },
   actions: {
