@@ -35,7 +35,7 @@ export default defineComponent({
     },
     delete{{ class.name }}({{ camel_case class.name }}: {{ class.name }}){
       if (confirm(`Are you sure to delete {{ class.name }} with id ${ {{ camel_case class.name }}.id }?`))
-        this.store.dispatch("{{ camel_case class.name.plural }}/delete{{ class.name }}", {{ camel_case class.name }})
+        this.store.dispatch("delete{{ class.name }}", {{ camel_case class.name }})
     },
     finishEditing() {
       this.edited{{ class.name }}Id = -1;
