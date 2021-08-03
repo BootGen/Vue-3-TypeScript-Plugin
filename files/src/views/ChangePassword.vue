@@ -38,7 +38,7 @@
       <input
         class="btn btn-primary"
         type="button"
-        value="Sign up"
+        value="Change Password"
         @click="onSubmit"
       />
     </form>
