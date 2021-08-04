@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw, NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 import Login from '../views/Login.vue';
+import Logout from '../views/Logout.vue';
 import SignUp from '../views/SignUp.vue';
 import Profile from '../views/Profile.vue';
 import ChangePassword from '../views/ChangePassword.vue';
