@@ -64,18 +64,23 @@ export default defineComponent({
     const { value: userName, errorMessage: userNameError } = useField<string>('userName');
     const { value: email, errorMessage: emailError } = useField<string>('email');
     let store = useStore<State>();
-    userName.value = store.state.auth.user.userName;
-    email.value = store.state.auth.user.email;
+    if(store.state.auth.user !== null){
+      userName.value = store.state.auth.user.userName;
+      email.value = store.state.auth.user.email;
+    }
     let errorMsg = ref('');
     const router = useRouter();
     const onSubmit = handleSubmit(async () => {
       try {
-        await api.updateProfile({
-          userName: userName.value,
-          email: email.value
-        }, store.state.auth.jwt);
-        store.dispatch('profile');
-        router.push('profile');
+        if(store.state.auth.user !== null){
+          await api.updateProfile({
+            id: store.state.auth.user.id,
+            userName: userName.value,
+            email: email.value
+          }, store.state.auth.jwt);
+          store.dispatch('profile');
+          router.push('profile');
+        }
       } catch (reason) {
         if (reason.isUserNameInUse) {
           errorMsg.value = 'This user name already exists!';
