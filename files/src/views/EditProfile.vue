@@ -2,7 +2,17 @@
   <div class="container-fluid">
     <form>
       <div class="mb-3">
-        <label for="email" class="form-label">Email address</label>
+        <label for="userName" class="form-label">Name</label>
+        <input
+          v-model="userName"
+          type="text"
+          class="form-control"
+          id="userName"
+        />
+        <span>{{ userNameError }}</span>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
         <input
           v-model="email"
           type="email"
@@ -11,23 +21,13 @@
         />
         <span>{{ emailError }}</span>
       </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input
-          v-model="password"
-          type="password"
-          class="form-control"
-          id="password"
-        />
-        <span>{{ passwordError }}</span>
-      </div>
       <div class="alert alert-danger" role="alert" v-if="errorMsg">
         {{ errorMsg }}
       </div>
       <input
         class="btn btn-primary"
         type="button"
-        value="Sign in"
+        value="Save"
         @click="onSubmit"
       />
     </form>
@@ -40,55 +40,59 @@ import { useForm, useField } from 'vee-validate';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { State } from '../store';
+import api from '../api';
 
 export default defineComponent({
   setup() {
     const simpleSchema = {
+      userName(value: string | undefined): boolean | string {
+        if (value && value.trim()) {
+          return true;
+        }
+        return 'This is required';
+      },
       email(value: string | undefined): boolean | string {
         if (value && value.trim()) {
           return (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value));
         }
-
-        return 'This is required';
-      },
-      password(value: string | undefined): boolean | string {
-        if (value && value.trim()) {
-          return true;
-        }
-
         return 'This is required';
       },
     };
-
     const { handleSubmit } = useForm({
       validationSchema: simpleSchema,
     });
-    const { value: email, errorMessage: emailError } = useField('email');
-    const { value: password, errorMessage: passwordError } =
-      useField('password');
+    const { value: userName, errorMessage: userNameError } = useField<string>('userName');
+    const { value: email, errorMessage: emailError } = useField<string>('email');
     let store = useStore<State>();
+    userName.value = store.state.auth.user.userName;
+    email.value = store.state.auth.user.email;
     let errorMsg = ref('');
     const router = useRouter();
-
     const onSubmit = handleSubmit(async () => {
       try {
-        await store.dispatch('login', {
-          email: email.value,
-          password: password.value,
-        });
+        await api.updateProfile({
+          userName: userName.value,
+          email: email.value
+        }, store.state.auth.jwt);
+        store.dispatch('profile');
         router.push('profile');
       } catch (reason) {
-        errorMsg.value = 'incorrect email or password';
+        if (reason.isUserNameInUse) {
+          errorMsg.value = 'This user name already exists!';
+        } else if (reason.isEmailInUse) {
+          errorMsg.value = 'This email already exists!';
+        } else {
+          errorMsg.value = '';
+        }
       }
     });
-
     return {
       onSubmit,
+      userName,
+      userNameError,
       email,
       emailError,
-      password,
-      passwordError,
-      errorMsg,
+      errorMsg
     };
   },
 });

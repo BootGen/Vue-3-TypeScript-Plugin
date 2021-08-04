@@ -3,6 +3,7 @@ import Login from '../views/Login.vue';
 import Logout from '../views/Logout.vue';
 import SignUp from '../views/SignUp.vue';
 import Profile from '../views/Profile.vue';
+import EditProfile from '../views/EditProfile.vue';
 import ChangePassword from '../views/ChangePassword.vue';
 import store from '../store';
 {{~ for class in classes ~}}
@@ -56,6 +57,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Profile',
     beforeEnter: loggedInGuard,
     component: Profile
+  },
+  {
+    path: '/edit-profile',
+    name: 'Edit Profile',
+    beforeEnter: loggedInGuard,
+    component: EditProfile
   },
   {
     path: '/change-password',

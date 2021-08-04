@@ -82,7 +82,7 @@ export default defineComponent({
       },
       email(value: string | undefined): boolean | string {
         if (value && value.trim()) {
-          return true;
+          return (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value));
         }
 
         return "This is required";

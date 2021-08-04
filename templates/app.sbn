@@ -1,6 +1,7 @@
 <template>
   <div id="nav"  v-if="store.state.auth.user">
     <router-link to="/profile">Profile</router-link>
+    | <router-link to="/edit-profile">Edit Profile</router-link>
     | <router-link to="/change-password">Change Password</router-link>
     {{~ for class in classes ~}}
     | <router-link to="/{{ camel_case class.name.plural }}">{{ class.name.plural }}</router-link>
